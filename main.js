@@ -6,7 +6,7 @@ const path = require('path');
 const url = require('url');
 const svgo = require('svgo');
 const execFile = require('child_process').execFile;
-const jpegtran = require('jpegtran-bin');
+const guetzli = require('guetzli');
 const pngquant = require('pngquant-bin');
 // const console = require('console'); // only for dev
 
@@ -32,7 +32,7 @@ function createWindow() {
     }));
 
     // Open the DevTools.
-    // mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
 
     mainWindow.on('closed', () => {
         mainWindow = null;
@@ -68,8 +68,8 @@ function createWindow() {
         ];
     }
 
-    const menu = Menu.buildFromTemplate(template);
-    Menu.setApplicationMenu(menu);
+    //const menu = Menu.buildFromTemplate(template);
+    //Menu.setApplicationMenu(menu);
 }
 
 
@@ -116,8 +116,7 @@ ipcMain.on(
 
                 case 'jpg':
                 case 'jpeg':
-                    execFile(jpegtran, ['-outfile', newFile, filePath], () => {
-                        dialog(err);
+                    execFile(guetzli, [filePath, newFile], err => {
                         event.sender.send('isShrinked', newFile);
                     });
 

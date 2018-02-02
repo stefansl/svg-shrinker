@@ -47,6 +47,11 @@ body {
   #dragzone h1 {
     margin: 0;
     font-weight: 700; }
+  #dragzone.processing {
+    background: #111 url("../img/puff.min.svg") no-repeat fixed center 16px;
+    background-size: 80px; }
+    #dragzone.processing h1, #dragzone.processing strong {
+      visibility: hidden; }
 
 .resLine {
   border-bottom: 1px solid rgba(17, 17, 17, 0.3);

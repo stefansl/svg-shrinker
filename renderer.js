@@ -28,12 +28,15 @@ document.ondrop = (e) => {
         ipcRenderer.send('shrinkSvg', f.name, f.path, f.lastModified);
     }
     dragzone.classList.remove('drag-active');
+    dragzone.classList.add('processing');
 
     return false;
 };
 
 ipcRenderer.on(
     'isShrinked', (event, path) => {
+
+        dragzone.classList.remove('processing');
 
         // Create container
         let resContainer = document.createElement('div');
